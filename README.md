@@ -1,6 +1,6 @@
 # Haskell Reader pattern and mig example app
 
-Show case for a small application written with mig and [Reader-pattern](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern/).
+Show case for a small application written with [mig](https://github.com/anton-k/mig) and [Reader-pattern](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern/).
 It is an example on how to make Dependency Injection in Haskell with Reader-pattern.
 
 Application allows to save messages with tags. 
@@ -81,7 +81,7 @@ The library `src/` defines types, interfaces, server and handlers
  * `Types` - types of the domain
  * `App` - reader pattern monad
  * `Api` - API for the app
- * `Server` - mig server and main envirnment (state) of the service
+ * `Server` - [mig](https://github.com/anton-k/mig) server and main envirnment (state) of the service
  * `DI.[Log | Time | Setup]` - interfaces for the app and common functions
  * `Server.[Save | GetMessage | ListTag | ToggleLog]` - handlers of the API-routes
 
@@ -98,7 +98,7 @@ Executable `app/` implements interfaces initialises service state and launchaes 
 In this example and tutorial we will learn how to build flexible
 web-apps with the help of reader pattern. We will mention some key-factors
 of the web-development domain, discuss the problems and solutions
-and look at how to combine Readr pattern with mig.
+and look at how to combine Readr pattern with [mig](https://github.com/anton-k/mig).
 While implementing a small app.
 
 What we will learn:
@@ -392,7 +392,7 @@ use proper naming on using interfaces and we are done.
 
 ### Using it with Mig
 
-In the mig we need to define server. We wrap our routes with mig
+In the [mig](https://github.com/anton-k/mig) we need to define server. We wrap our routes with mig
 dsl functions to call the handles:                                                                                                       
 
 ```haskell
