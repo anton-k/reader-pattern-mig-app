@@ -42,6 +42,7 @@ library
       src
   default-extensions:
       DataKinds
+      DeriveAnyClass
       DeriveGeneric
       DerivingVia
       DuplicateRecordFields
@@ -61,7 +62,7 @@ library
     , containers
     , deriving-aeson
     , exceptions
-    , mig
+    , mig-server
     , mtl
     , stm
     , text
@@ -83,6 +84,7 @@ executable reader-pattern-mig-app-exe
       app
   default-extensions:
       DataKinds
+      DeriveAnyClass
       DeriveGeneric
       DerivingVia
       DuplicateRecordFields
@@ -102,10 +104,12 @@ executable reader-pattern-mig-app-exe
     , containers
     , deriving-aeson
     , exceptions
+    , http-types
     , immortal
-    , mig
+    , mig-server
     , mtl
     , optparse-applicative
+    , pretty-simple
     , reader-pattern-mig-app
     , stm
     , text
@@ -122,6 +126,7 @@ test-suite reader-pattern-mig-app-test
       test
   default-extensions:
       DataKinds
+      DeriveAnyClass
       DeriveGeneric
       DerivingVia
       DuplicateRecordFields
@@ -141,7 +146,7 @@ test-suite reader-pattern-mig-app-test
     , containers
     , deriving-aeson
     , exceptions
-    , mig
+    , mig-server
     , mtl
     , reader-pattern-mig-app
     , stm

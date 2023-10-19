@@ -5,7 +5,6 @@ module Server
   ) where
 
 import Mig.Json
-import Data.Bifunctor
 import Server.GetMessage qualified as GetMessage
 import Server.ListTag    qualified as ListTag
 import Server.Save       qualified as Save
@@ -25,23 +24,26 @@ data Env = Env
 -- | Mig server for the app
 server :: Server (App Env)
 server =
-  "api" /. "v1" /.
-     mconcat
-       [ "save" /. handleSave
-       , "get" /. "message" /. handleGetById
-       , "list" /. "tag" /. handleGetByTag
-       , "toggle-logs" /. handleToggleLogs
-       ]
+  "api/v1" /.
+    [ "save" /. handleSave
+    , "get/message" /. handleGetById
+    , "list/tag" /. handleGetByTag
+    , "toggle-logs" /. handleToggleLogs
+    ]
   where
-    handleSave :: Body SaveRequest -> Post (App Env) SaveResponse
-    handleSave (Body req) = Post $ withApp (.save) $ Save.handle req
+    handleSave :: Body SaveRequest -> Post (App Env) (Resp SaveResponse)
+    handleSave (Body req) = Send $
+      fmap ok $ withApp (.save) $ Save.handle req
 
-    handleGetById :: Capture MessageId -> Get (App Env) (Either (Error ApiError) Message)
-    handleGetById (Capture messageId) = Get $ withApp (.getMessage) $
-      first (Error status400) <$> GetMessage.handle messageId
+    handleGetById :: Capture "message-id" MessageId -> Get (App Env) (RespOr ApiError Message)
+    handleGetById (Capture messageId) = Send $
+      withApp (.getMessage) $
+        either (bad status400) ok <$> GetMessage.handle messageId
 
-    handleGetByTag :: Capture Tag -> Get (App Env) [Message]
-    handleGetByTag (Capture tag) = Get $ withApp (.listTag) $ ListTag.handle tag
+    handleGetByTag :: Capture "tag" Tag -> Get (App Env) (Resp [Message])
+    handleGetByTag (Capture tag) = Send $
+      fmap ok $ withApp (.listTag) $ ListTag.handle tag
 
-    handleToggleLogs :: Post (App Env) ()
-    handleToggleLogs = Post $ withApp (.toggleLogs) ToggleLog.handle
+    handleToggleLogs :: Post (App Env) (Resp ())
+    handleToggleLogs = Send $
+      fmap ok $ withApp (.toggleLogs) ToggleLog.handle

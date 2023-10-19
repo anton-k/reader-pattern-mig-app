@@ -19,6 +19,7 @@ const save = (routes, message, tags) => {
   const params = {
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
   };
   http.post(routes.save, payload, params);
@@ -26,20 +27,30 @@ const save = (routes, message, tags) => {
 
 const getMessage = (routes, messageId) => {
   const url = `${routes.getId}/${messageId}`;
-  http.get(url);
+  const params = {
+    headers: {
+      'accept': 'application/json'      
+    }
+  };
+  http.get(url, params);
 };
 
 const getTag = (routes, tag) => {
   const url = `${routes.getTag}/${tag}`;
-  http.get(url);
+  const params = {
+    headers: {
+      'accept': 'application/json'      
+    }
+  };
+  http.get(url, params);
 };
 
 const toggleLogs = (routes) => {
   const url = routes.toggleLogs;
-  const payload = JSON.stringify({});
+  const payload = null;
   const params = {
     headers: {
-      'Content-Type': 'application/json',
+      'accept': 'application/json',
     },
   };
   http.post(url, payload, params);

@@ -19,7 +19,6 @@ import Server.ListTag    qualified as ListTag
 import Server.Save       qualified as Save
 import Server.ToggleLog  qualified as ToggleLog
 
-
 main :: IO ()
 main = runServer =<< readConfig
 
@@ -46,7 +45,7 @@ runServer config = do
 
   runImmortal $ do
     ilog.logInfo $ "Start server on http://localhost:" <> display config.port
-    Mig.runServer config.port =<< Mig.renderServer server env
+    Mig.runServer config.port (Mig.renderServer server env)
 
 ------------------------------------------------------------
 -- utils

@@ -30,10 +30,11 @@ dependencies:
 - time
 - text
 - containers
-- mig
+- mig-server
 
 default-extensions:
   - DataKinds
+  - DeriveAnyClass
   - DeriveGeneric
   - DerivingVia
   - DuplicateRecordFields
@@ -76,6 +77,8 @@ executables:
     - optparse-applicative
     - yaml
     - reader-pattern-mig-app
+    - http-types
+    - pretty-simple
 
 tests:
   reader-pattern-mig-app-test:

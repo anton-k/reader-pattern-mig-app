@@ -43,7 +43,14 @@ packages:
 # extra-deps: []
 extra-deps:
  - git: https://github.com/anton-k/mig
-   commit: 31347fc7be4a44e27ecd3592bf4e1a2edf5d12d2
+   commit: 876a867cda24a0d7d66628c68defad0388c22e37
+   subdirs:
+     - mig
+     - mig-extra
+     - mig-client
+     - mig-wai
+     - mig-swagger-ui
+     - mig-server
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
